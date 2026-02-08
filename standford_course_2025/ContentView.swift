@@ -10,15 +10,31 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-            if true {
-                Text("Hello, world!")
+            pegs(colors: [.red, .green, .blue, .yellow])
+            pegs(colors: [.red, .green, .blue, .yellow])
+            pegs(colors: [.red, .green, .blue, .yellow])
+            pegs(colors: [.red, .green, .blue, .purple])
+           
+        }
+        .padding()
+    }
+    
+    func pegs (colors: Array<Color> = []) -> some View{
+        HStack {
+            ForEach(colors.indices, id:\.self) { index in
+                RoundedRectangle(cornerRadius: 10)
+                    .aspectRatio(1, contentMode: .fit)
+                    .foregroundStyle(colors[index])
             }
-            Text("howdy")
-            Circle()
+            MatchMarkers(matches: [.exact, .nomatch, .inexact])
+            
+            
         }
     }
 }
+
+
+
 
 #Preview {
     ContentView()

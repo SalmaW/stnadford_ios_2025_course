@@ -1,14 +1,49 @@
+//
+//  MatchMarkers.swift
+//  standford_course_2025
+//
+//  Created by Wael Maarouf on 08/02/2026.
+//
+
+import SwiftUI
+
+enum Match {
+    case nomatch
+    case exact
+    case inexact
+}
+
  struct MatchMarkers: View{
+     var matches: [Match] // Array<Match> == [Match]
         var body: some View{
             HStack{
                 VStack{
-                    Circle()
-                    Circle().strokeBorder(.primary, lineWidth: 3).aspectRatio(1,contentMode: .fit)
+                    
+                    matchMarker(peg: 0)
+                    matchMarker(peg: 1)
+//                    Circle()
+//                    Circle().strokeBorder(.primary, lineWidth: 3).aspectRatio(1,contentMode: .fit)
                 }
                 VStack{
-                    Circle()
-                    Circle().opacity(0)
+                    matchMarker(peg: 2)
+                    matchMarker(peg: 3)
+//                    Circle()
+//                    Circle().opacity(0)
                 }
             }
         }
+     func matchMarker(peg: Int) -> some View{
+         let exactCount: Int = matches.count(where: {match in match == .exact})
+         let foundCount: Int = matches.count(where: {match in match != .nomatch})
+         
+         return Circle()
+             .fill(exactCount
+                   > peg ? .primary : Color.clear)
+             .strokeBorder(foundCount > peg ? .primary : Color.clear, lineWidth: 2)
+             .aspectRatio(1, contentMode: .fit)
+     }
     }
+
+#Preview {
+    MatchMarkers(matches: [.exact, .nomatch, .inexact])
+}
