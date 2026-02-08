@@ -8,13 +8,13 @@
 import SwiftUI
 
 enum Match {
-    case nomatch //$0
+    case nomatch  ///$0
     case exact
     case inexact
 }
 
 struct MatchMarkers: View {
-    var matches: [Match]  // Array<Match> == [Match]
+    var matches: [Match]  /// Array<Match> == [Match]
     var body: some View {
         HStack {
             VStack {
@@ -34,8 +34,8 @@ struct MatchMarkers: View {
     }
 
     func matchMarker(peg: Int) -> some View {
-        let exactCount: Int = matches.count { $0 == .exact }  // $0 is the same as the (first argument) Match.exact
-        let foundCount: Int = matches.count{ $0 != .nomatch }
+        let exactCount: Int = matches.count { $0 == .exact }  /// $0 is the same as the (first argument) Match.exact
+        let foundCount: Int = matches.count { $0 != .nomatch }
 
         return Circle()
             .fill(
@@ -47,10 +47,6 @@ struct MatchMarkers: View {
                 lineWidth: 2
             )
             .aspectRatio(1, contentMode: .fit)
-    }
-    
-    func isExact(match: Match) -> Bool{
-        match == .exact
     }
 }
 
